@@ -140,7 +140,7 @@ AUTHENTICATION_BACKENDS = (
 FILE_UPLOAD_PERMISSIONS = 0o640
 
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
-
+"""
 if not DEBUG:
     DEFAULT_FROM_EMAIL="Uridium <mail@uridium.network>"
     EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
@@ -175,3 +175,4 @@ if not DEBUG:
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'
+    """
