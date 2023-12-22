@@ -11,8 +11,7 @@ ENVIRONMENT = env
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-jnd42709vnsx33g@_5w+3&r5f2*z^a)-y71st-q*#86n$#x#%8')
 SITE_NAME = 'Primera CBPA'
 #DEBUG = os.environ.get('DEBUG')
 DEBUG = 'RENDER' not in os.environ
@@ -31,7 +30,6 @@ if not DEBUG:
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 if RENDER_EXTERNAL_HOSTNAME:
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
-
 
 # Application definition
 DJANGO_APPS = [
@@ -87,7 +85,7 @@ WSGI_APPLICATION = 'primera.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost/postgres',
+        default='postgresql://postgres:postgres@localhost:5432/mysite',
         conn_max_age=600
     )
 }
