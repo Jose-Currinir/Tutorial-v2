@@ -4,6 +4,7 @@ import environ
 from dotenv import load_dotenv
 import dj_database_url
 
+
 load_dotenv()
 env = environ.Env()
 environ.Env.read_env()
