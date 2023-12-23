@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'primera.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost:5432/primera',
+        default='postgresql://primera_2h6q_user:DHSdSk3rHI0Shijij88QkV1QMIaTr68v@localhost:5432/primera_2h6q',
         conn_max_age=600
     )
 }
