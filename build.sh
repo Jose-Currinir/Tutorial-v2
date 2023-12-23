@@ -10,6 +10,4 @@ python manage.py collectstatic --no-input
 python manage.py makemigrations webpage
 python manage.py migrate
 
-from django.contrib.auth.models import User
-superuser = User.objects.create_superuser('admin', 'jpcurrinir@gmail.com', 'admin')
-superuser.save()
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'jpcurrinir@gmail.com', 'admin')" | python manage.py shell
