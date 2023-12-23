@@ -7,5 +7,5 @@ pip install -r requirements.txt
 
 python manage.py collectstatic --no-input
 
-python manage.py makemigrations apps.webapp
+python manage.py makemigrations apps.webpage
 python manage.py migrate
