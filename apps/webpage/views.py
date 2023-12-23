@@ -18,7 +18,7 @@ from django.contrib.auth import logout
 from django.urls import reverse
 
 
-#@cache_page(60 * 2)
+@cache_page(60 * 2)
 def index(request):
     template_name = 'webpage/index.html'
     name_hero = 'Inicio'
@@ -35,7 +35,7 @@ def index(request):
         'especialidades' : especialidades,
     })
 
-#@cache_page(60 * 2)
+@cache_page(60 * 2)
 def historia(request):
     page = 'webpage/historia.html'
     name_hero = 'Historia'
@@ -45,7 +45,7 @@ def historia(request):
          'description_hero' : description_hero
     })
 
-#@cache_page(60 * 2)
+@cache_page(60 * 2)
 def material_mayor(request):
     page                =   'webpage/material-mayor.html'
     name_hero           =   'Material Mayor'
@@ -61,7 +61,7 @@ def material_mayor(request):
             'especialidades':   especialidades,
     })
 
-#@cache_page(60 * 2)
+@cache_page(60 * 2)
 def voluntarios(request):
     page = 'webpage/voluntarios.html'
     name_hero = 'Voluntarios'
@@ -87,7 +87,7 @@ def voluntarios(request):
         'activos': activos
     })
 
-#@cache_page(60 * 2)
+@cache_page(60 * 2)
 def brigada_juvenil(request):
     page = 'webpage/brigada-juvenil.html'
     name_hero = 'Brigada Juvenil'
@@ -97,7 +97,7 @@ def brigada_juvenil(request):
         'description_hero' : description_hero
         })
 
-#@cache_page(60 * 2)
+@cache_page(60 * 2)
 def noticias(request):
     page = 'webpage/noticias.html'
     name_hero = 'Artículos'
@@ -125,7 +125,7 @@ def noticias(request):
         'fecha_filtro': fecha_filtro,
     })
 
-#@cache_page(60 * 2)
+@cache_page(60 * 2)
 def detalle_noticia(request, noticia_id):
     noticia = get_object_or_404(Noticia, pk=noticia_id)
     return render(request, 'webpage_fun/detalle_noticia.html', {'noticia': noticia})
@@ -176,7 +176,7 @@ def contacto(request):
         'form': form,  # Pasa el formulario a la plantilla
     })
 
-#@cache_page(60 * 2)
+@cache_page(60 * 2)
 def postulacion(request):
     page = 'webpage/postulaciones.html'
     name_hero = 'Postulación'
@@ -201,7 +201,7 @@ def postulacion(request):
         'form': form,
     })
 
-#@cache_page(60 * 2)
+@cache_page(60 * 2)
 def login (request):
     page = 'users/login.html'
     name_hero = 'Inicio Sesión'
