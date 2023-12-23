@@ -11,7 +11,8 @@ ENVIRONMENT = env
 
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-jnd42709vnsx33g@_5w+3&r5f2*z^a)-y71st-q*#86n$#x#%8')
+#SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-jnd42709vnsx33g@_5w+3&r5f2*z^a)-y71st-q*#86n$#x#%8')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 SITE_NAME = 'Primera CBPA'
 #DEBUG = os.environ.get('DEBUG')
 DEBUG = 'RENDER' not in os.environ
@@ -85,7 +86,7 @@ WSGI_APPLICATION = 'primera.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://primera_2h6q_user:DHSdSk3rHI0Shijij88QkV1QMIaTr68v@localhost:5432/primera_2h6q',
+        default='postgres://primera_2h6q_user:DHSdSk3rHI0Shijij88QkV1QMIaTr68v@dpg-cm2qfcda73kc73elip60-a/primera_2h6q',
         conn_max_age=600
     )
 }
