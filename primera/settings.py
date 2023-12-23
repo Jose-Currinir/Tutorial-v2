@@ -44,7 +44,7 @@ DJANGO_APPS = [
 ]
 PROJECT_APPS = [
     'apps.webpage',
-    'apps.inventory'
+    #'apps.inventory'
 ]
 THIRD_PARTY_APPS = [
     'bootstrap5',
