@@ -1,0 +1,218 @@
+{% extends "webpage_base.html" %}
+{% load static%}
+{% block titulo %}{{ name_hero }}{% endblock%}
+{% block content %}
+<!-- Start: Hero-->
+<section class="py-5 text-white bg-primary text-center mb-4" style="background-image: url('{% static 'img/hero-default-img.svg' %}'); background-position: center; background-size: cover;">
+    <div class="container">
+        <h1 class="text-uppercase fw-semibold mb-3">{{ name_hero }}</h1>
+        <!--<p class="mb-4">{{ description_hero }}</p>-->
+    </div>
+</section>
+<!-- Start: Perfil Primerino -->
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="text-capitalize text-primary text-opacity-75">Perfil Primerino</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center px-3">
+                <p>El papel del bombero primerino se destaca por su alineación con nuestro lema "Deber y Constancia". Esta figura simboliza no solo habilidades técnicas de primer nivel, sino también una capacidad de liderazgo ejemplar, crucial en situaciones de emergencia. Su compromiso se refleja en una constancia que va más allá de lo ordinario, mostrando una dedicación que es ejemplar en el servicio de bomberos. La fortaleza, tanto física como mental, es una característica destacada, al igual que la capacidad de trabajar en equipo de manera efectiva y un profundo respeto por las tradiciones. Así, el bombero de la Primera Compañía representa un ideal en la profesión, siendo un verdadero reflejo del lema que guía su servicio.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Start: Oficiales Administrativos -->
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="mb-1 text-capitalize text-primary text-opacity-75">Oficialidad Administrativa</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center mb-4">El mando administrativo se encarga de la gestión y organización interna de la compañia. Incluye tareas como la administración de recursos financieros, mantenimiento y adquisición de equipamiento, gestión del personal y desarrollo de estrategias. Este rol es crucial para asegurar que la compañía opere eficientemente, manteniendo altos estándares de preparación y respuesta. El mando administrativo también supervisa la formación y capacitación de los bomberos, así como el cumplimiento de normativas y políticas internas.</p>
+            </div>
+        </div>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 justify-content-center">
+            {% for voluntario in administrativos %}
+            <div class="col mb-4">
+                <div class="card border-0 shadow-none">
+                    <div class="card-body text-center d-flex flex-column align-items-center p-0">
+                        {% if voluntario.foto %}
+                            <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{{ voluntario.foto.url }}">
+                        {% else %}
+                            <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{% static 'img/default-user.png' %}">
+                        {% endif %}
+                        <h5 class="fw-bold text-primary card-title mb-0">{{ voluntario.cargo }}</h5>
+                        <p class="text-muted card-text">{{ voluntario.nombre }} {{ voluntario.apellido }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col mb-4">
+                <div class="card border-0 shadow-none">
+                    <div class="card-body text-center d-flex flex-column align-items-center p-0">
+                        <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{% static 'img/default-user.png' %}">
+                        <h5 class="fw-bold text-primary card-title mb-0">No disponible</h5>
+                        <p class="text-muted card-text">No disponible</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Start: Oficiales Operativos -->
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="mb-1 text-capitalize text-primary text-opacity-75">Oficialidad Operativa</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center mb-4">El mando operativo se centra en la coordinación y ejecución de las operaciones de respuesta a emergencias. Estos líderes innatos toman decisiones críticas en el lugar de los incidentes, dirigiendo las tácticas de extinción de incendios, rescate y asistencia en situaciones de emergencia. Son responsables de la seguridad del personal en el terreno y de la eficacia de las operaciones. Este rol requiere un conocimiento profundo de las técnicas de combate contra incendios, habilidades de liderazgo y capacidad para tomar decisiones rápidas bajo presión.</p>
+            </div>
+        </div>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 justify-content-center">
+            {% for voluntario in operativos %}
+            <div class="col mb-4">
+                <div class="card border-0 shadow-none">
+                    <div class="card-body text-center d-flex flex-column align-items-center p-0">
+                        {% if voluntario.foto %}
+                            <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{{ voluntario.foto.url }}">
+                        {% else %}
+                            <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{% static 'img/default-user.png' %}">
+                        {% endif %}
+                        <h5 class="fw-bold text-primary card-title mb-0">{{ voluntario.cargo }}</h5>
+                        <p class="text-muted card-text">{{ voluntario.nombre }} {{ voluntario.apellido }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col mb-4">
+                <div class="card border-0 shadow-none">
+                    <div class="card-body text-center d-flex flex-column align-items-center p-0">
+                        <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{% static 'img/default-user.png' %}">
+                        <h5 class="fw-bold text-primary card-title mb-0">No disponible</h5>
+                        <p class="text-muted card-text">No disponible</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Start: Voluntarios Honorarios -->         
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="mb-1 text-capitalize text-primary text-opacity-75">Voluntarios Insignes y Voluntarios Honorarios</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center mb-4"><strong>Insgine: </strong> Mención que reciben todos aquellos bomberos y bomberas que poseen 50 o más años de servicio.</p>
+                <p class="text-center mb-4"><strong>Honorario: </strong> Bomberos que poseen entre 15 y 50 años de servicio.</p>
+            </div>
+        </div>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 justify-content-center">
+            {% for voluntario in honorarios %}
+            <div class="col mb-4">
+                <div class="card border-0 shadow-none">
+                    <div class="card-body text-center d-flex flex-column align-items-center p-0">
+                        {% if voluntario.foto %}
+                            <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{{ voluntario.foto.url }}">
+                        {% else %}
+                            <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{% static 'img/default-user.png' %}">
+                        {% endif %}
+                        <h5 class="fw-bold text-primary card-title mb-0">{{ voluntario.cargo }}</h5>
+                        <p class="text-muted card-text">{{ voluntario.nombre }} {{ voluntario.apellido }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col mb-4">
+                <div class="card border-0 shadow-none">
+                    <div class="card-body text-center d-flex flex-column align-items-center p-0">
+                        <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{% static 'img/default-user.png' %}">
+                        <h5 class="fw-bold text-primary card-title mb-0">No disponible</h5>
+                        <p class="text-muted card-text">No disponible</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Start: Voluntarios Activos -->
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="mb-1 text-capitalize text-primary text-opacity-75">Voluntarios Activos</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center mb-4">Reciben el nombre de "Voluntarios Activos" todos los bomberos y bomberas que poseen entre 0 y 15 años de servicio.</p>
+            </div>
+        </div>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-lg-5 justify-content-center">
+            {% for voluntario in activos %}
+            <div class="col mb-4">
+                <div class="card border-0 shadow-none">
+                    <div class="card-body text-center d-flex flex-column align-items-center p-0">
+                        {% if voluntario.foto %}
+                            <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{{ voluntario.foto.url }}">
+                        {% else %}
+                            <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{% static 'img/default-user.png' %}">
+                        {% endif %}
+                        <h5 class="fw-bold text-primary card-title mb-0">{{ voluntario.cargo }}</h5>
+                        <p class="text-muted card-text">{{ voluntario.nombre }} {{ voluntario.apellido }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col mb-4">
+                <div class="card border-0 shadow-none">
+                    <div class="card-body text-center d-flex flex-column align-items-center p-0">
+                        <img class="rounded-circle mb-3 fit-cover" width="130" height="130" src="{% static 'img/default-user.png' %}">
+                        <h5 class="fw-bold text-primary card-title mb-0">No disponible</h5>
+                        <p class="text-muted card-text">No disponible</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Start: Brigada Juvenil -->
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <section class="py-4 py-xl-5">
+                    <div class="container-fluid">
+                        <div class="bg-light border rounded border-0 border-light d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5">
+                            <div class="text-primary pb-2 pb-lg-1 text-center">
+                                <h2 class="text-capitalize fw-lighter mb-2">Brigada Juvenil</h2>
+                                <p class="mb-0" style="color:black;">En la Brigada Juvenil “Capitán Mario Clavero Ramírez” siempre nos hemos preocupado de instruir a niños, niñas y adolescentes para que sean un aporte positivo en nuestra sociedad. Personas que, más allá de los conocimientos bomberiles, sean capaces de trabajar en equipo, anteponer el bienestar común por sobre los intereses particulares y puedan actuar de manera íntegra según dictan nuestros principios y vocación de servicio. </p>
+                            </div>
+                        </div>
+                        <div class="text-center my-2">
+                            <a class="btn btn-primary fs-5 fw-light py-2 px-4" href="{% url 'brigada_juvenil' %}">Pagina de la brigada</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock%}

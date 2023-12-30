@@ -1,0 +1,255 @@
+{% extends "webpage_base.html" %}
+{% load static%}
+{% block titulo %}{{ name_hero }}{% endblock%}
+{% block content %}
+<!-- Start: Hero -->
+<section class="py-5 text-white bg-primary text-center mb-4" style="background-image: url('{% static 'img/hero-default-img.svg' %}'); background-position: center; background-size: cover;">
+    <div class="container">
+        <h1 class="text-uppercase fw-semibold mb-3">{{ name_hero }}</h1>
+        <!--<p class="mb-4">{{ description_hero }}</p>-->
+    </div>
+</section>
+<!-- Start: Noticias -->
+<section data-aos="fade-up" style="margin-bottom: 32px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="text-capitalize text-primary text-opacity-75">Todos</h3>
+                <p>Aquí aparecerán los últimos artículos de nuestra compañía</p>
+            </div>
+        </div>
+        <form class="py-4 py-xl-5 border rounded border-0 border-light d-flex flex-column align-items-center p-4 p-md-5" method="get" action="{% url 'noticias' %}">
+            <div class="d-flex align-items-center justify-content-center justify-content-md-start flex-wrap">
+                <label for="fecha_filtro" class="text-primary pb-2 pb-lg-1 me-md-2">Filtrar por fecha:</label>
+                <select name="fecha_filtro" id="fecha_filtro" class="form-select me-md-2" style="width: 200px;">
+                    <option value="" {% if not fecha_filtro %}selected{% endif %}>Todas las fechas</option>
+                    <option value="hoy" {% if fecha_filtro == 'hoy' %}selected{% endif %}>Hoy</option>
+                    <option value="semana" {% if fecha_filtro == 'semana' %}selected{% endif %}>Última semana</option>
+                </select>
+                <button type="submit" class="btn btn-primary py-2 px-4" style="background-color: transparent; border: 2px solid var(--bs-primary);">Filtrar</button>
+            </div>
+        </form>
+        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+            {% if user.is_authenticated %}
+            <div class="col">
+                <a href="{% url 'admin:pagina_bomberos_noticia_changelist' %}" style="color: var(--bs-body-bg);">
+                    <div class="card border-secondary-subtle">
+                        <img class="card-img-top w-100 d-block card-img-top w-100 fit-cover"
+                             style="height:200px;"
+                             src="{% static 'img/default-user.png' %}">
+                        <div class="card-body p-4">
+                            <p class="text-primary card-text">¿Deseas agregar una noticia?</p>
+                            <h4 class="card-title">Presióname</h4>
+                            <p class="card-text"></p>
+                            <div class="d-flex">
+                                <div>
+                                    <p class="fw-bold mb-0"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endif %}
+            {% for noticia in noticias %}
+            <div class="col">
+                <div class="card border-secondary-subtle">
+                    <img class="card-img-top w-100 d-block card-img-top w-100 fit-cover"
+                         style="height:200px;"
+                         src="{{ noticia.imagen_noticia.url }}">
+                    <div class="card-body p-4">
+                        <p class="text-primary card-text">{{ noticia.categoria.CategoriaNoticia }}</p>
+                        <h4 class="card-title">{{ noticia.titulo }}</h4>
+                        <p class="card-text">
+                            {% for contenido in noticia.contenido_set.all %}
+                            {{ contenido.contenido|truncatechars:20 }}
+                            {% endfor %}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="fw-bold mb-0">{{ noticia.fecha_pub|date:"d M Y" }}</p>
+                            <button type="button" class="btn btn-primary ver-detalle" data-bs-toggle="modal" data-bs-target="#noticiaModal" data-noticia-id="{{ noticia.id }}">
+                              Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col">
+                <a href="#" style="color: var(--bs-body-bg);">
+                    <div class="card border-secondary-subtle">
+                        <img class="card-img-top w-100 d-block card-img-top w-100 fit-cover"
+                             style="height:200px;"
+                             src="{% static 'img/default-user.png' %}">
+                        <div class="card-body p-4">
+                            <p class="text-primary card-text">No disponible</p>
+                            <h4 class="card-title">No disponible</h4>
+                            <p class="card-text">No disponible</p>
+                            <div class="d-flex">
+                                <div>
+                                    <p class="fw-bold mb-0">No disponible</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Start: Historia -->
+<section id="Historia" data-aos="fade-up" style="margin-bottom: 32px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="text-capitalize text-primary text-opacity-75">Historia</h3>
+                <p>Aquí encontrarás las últimas publicaciones de nuestro historiador.</p>
+            </div>
+        </div>
+        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+            {% for noticia in noticias_historia %}
+            <div class="col">
+                <div class="card border-secondary-subtle">
+                    <img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="{{ noticia.imagen_noticia.url }}">
+                    <div class="card-body p-4">
+                        <p class="text-primary card-text">{{ noticia.categoria.CategoriaNoticia }}</p>
+                        <h4 class="card-title">{{ noticia.titulo }}</h4>
+                        <p class="card-text">
+                            {% for contenido in noticia.contenido_set.all %}
+                            {{ contenido.contenido|truncatechars:20 }}
+                            {% endfor %}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="fw-bold mb-0">{{ noticia.fecha_pub|date:"d M Y" }}</p>
+                            <button type="button" class="btn btn-primary ver-detalle" data-bs-toggle="modal" data-bs-target="#noticiaModal" data-noticia-id="{{ noticia.id }}">
+                              Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col">
+                <a href="#" style="color: var(--bs-body-bg);">
+                    <div class="card border-secondary-subtle">
+                        <img class="card-img-top w-100 d-block card-img-top w-100 fit-cover" style="height:200px;" src="{% static 'img/default-user.png' %}">
+                        <div class="card-body p-4">
+                            <p class="text-primary card-text">No disponible</p>
+                            <h4 class="card-title">No disponible</h4>
+                            <p class="card-text">No disponible</p>
+                            <div class="d-flex">
+                                <div>
+                                    <p class="fw-bold mb-0">No disponible</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Start: Tips para la comunidad -->
+<section data-aos="fade-up" style="margin-bottom: 32px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="text-primary text-opacity-75">Ayuda a la comunidad</h3>
+                <p>Aquí aparecerán los últimos artículos sobre tips para la comunidad</p>
+            </div>
+        </div>
+        <div class="row gy-4 row-cols-1 row-cols-md-2 row-cols-xl-3">
+            {% for noticia in noticias_comunidad %}
+            <div class="col">
+                <div class="card border-secondary-subtle">
+                    <img class="card-img-top w-100 fit-cover" style="height:200px;" src="{{ noticia.imagen_noticia.url }}" alt="{{ noticia.titulo }}">
+                    <div class="card-body p-4">
+                        <p class="text-primary card-text">{{ noticia.categoria.CategoriaNoticia }}</p>
+                        <h4 class="card-title">{{ noticia.titulo }}</h4>
+                        <p class="card-text">
+                            {% for contenido in noticia.contenido_set.all %}
+                            {{ contenido.contenido|truncatechars:20 }}
+                            {% endfor %}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <p class="fw-bold mb-0">{{ noticia.fecha_pub|date:"d M Y" }}</p>
+                            <button type="button" class="btn btn-primary ver-detalle" data-bs-toggle="modal" data-bs-target="#noticiaModal" data-noticia-id="{{ noticia.id }}">
+                              Ver Detalles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col">
+                <a href="#" style="color: var(--bs-body-bg);">
+                    <div class="card border-secondary-subtle">
+                        <img class="card-img-top w-100 fit-cover" style="height:200px;" src="{% static 'img/default-user.png' %}" alt="No Disponible">
+                        <div class="card-body p-4">
+                            <p class="text-primary card-text">No disponible</p>
+                            <h4 class="card-title">No disponible</h4>
+                            <p class="card-text">No disponible</p>
+                            <div class="d-flex">
+                                <div>
+                                    <p class="fw-bold mb-0">No disponible</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!--Ventana modal para mostrar el detalle-->
+<div class="modal fade" id="noticiaModal" tabindex="-1" aria-labelledby="noticiaModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="noticiaModalLabel">De   talle de la Noticia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img class="img-fluid" id="noticiaModalImage" alt="Imagen de la noticia">
+                        </div>
+                        <div class="col-lg-6">
+                            <h2 id="noticiaModalTitle"></h2>
+                            <p class="text-primary" id="noticiaModalCategory"></p>
+                            <p id="noticiaModalDate"></p>
+                            <div id="noticiaModalContent"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock%}
+
+{% block js %}
+<!--Más codigo para las noticias-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var verDetalleButtons = document.querySelectorAll('.ver-detalle');
+    
+        verDetalleButtons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var noticiaId = this.getAttribute('data-noticia-id');
+            
+            // Realizar solicitud AJAX
+            fetch('/ruta-a-tu-vista-detalle-noticia/' + noticiaId)
+              .then(response => response.text())
+              .then(data => {
+                document.querySelector('#noticiaModal .modal-body').innerHTML = data;
+              });
+          });
+        });
+    }); 
+</script>
+{% endblock%}

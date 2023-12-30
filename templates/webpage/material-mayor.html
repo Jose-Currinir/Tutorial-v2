@@ -1,0 +1,210 @@
+{% extends "webpage_base.html" %} 
+{% load static%}
+{% block titulo %}{{ name_hero }}{% endblock%}
+{% block content %}
+<!-- Start: Hero -->
+<section class="py-5 text-white bg-primary text-center mb-4" style="background-image: url('{% static 'img/hero-default-img.svg' %}'); background-position: center; background-size: cover;">
+    <div class="container">
+        <h1 class="text-uppercase fw-semibold mb-3">{{ name_hero }}</h1>
+        <!--<p class="mb-4">{{ description_hero }}</p>-->
+    </div>
+</section>
+<!-- Start: Introducción -->
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-capitalize text-primary text-opacity-75 text-center">Introducción</h3>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <p class="text-center">El "Material Mayor" es uno de nuestros pilares fundamentales en las operaciones de cualquier compañía de bomberos. Esta sección se dedica a los carros y equipos esenciales que hacen posible nuestra misión de salvar vidas y bienes. Cada carro de nuestra institución, herramienta de rescate y equipo especializado nos permite enfrentarnos de manera eficaz a las emergencias. Además de que nos garantiza una respuesta rápida y efectiva, maximizando la seguridad de nuestros voluntarios.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Start: Carros Reliquias -->
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="text-capitalize text-primary text-opacity-75">Carros Reliquias</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="mb-4">Los carros reliquias son aquellas piezas de material mayor que cumplen X años de servicio a la comunidad. Al momento de haber terminado su vida útil para los servicios, se le asigna este estado de “Reliquia”, el cual lo deja exento de salir a los servicios. Son la viva imagen de nuestra historia.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <!--Listar carros reliquias-->
+            {% for carro in carros_reliquia %}
+            <div class="row mb-3">  <!-- Añade un margen entre filas -->
+                <div class="col-md-6 text-center">
+                    <img class="img-fluid img-fluid mb-3 rounded" src="{{ carro.foto.url }}" loading="auto">
+                </div>
+                <div class="col-md-6">
+                    <div class="card bg-body-tertiary mb-3">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">{{ carro.modelo }}</h4>
+                            <h6 class="text-muted card-subtitle mb-2">{{ carro.especialidad }}</h6>
+                            <p class="card-text"><strong>Modelo:</strong> {{ carro.modelo }}</p>
+                            <p class="card-text"><strong>Origen:</strong> {{ carro.origen }}</p>
+                            <p class="card-text"><strong>Año Fabricacion:</strong> {{ carro.anio_fabricacion }}</p>
+                            <p class="card-text"><strong>Caracteristicas:</strong> {{ carro.caracteristicas }}</p>
+                            <p class="card-text"><strong>Especialidad:</strong> {{ carro.especialidad }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="row mb-3">  <!-- Añade un margen entre filas -->
+                <div class="col-md-6 text-center">
+                    <img class="img-fluid rounded" src="{% static 'img/default-user.png' %}" loading="auto">
+                </div>
+                <div class="col-md-6">
+                    <div class="card bg-body-tertiary">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">No hay carros reliquias en la base de datos</h4>
+                            <h6 class="text-muted card-subtitle mb-2 text-center"> N/A</h6>
+                            <p class="card-text"><strong>Modelo:</strong> N/A</p>
+                            <p class="card-text"><strong>Origen:</strong> N/A</p>
+                            <p class="card-text"><strong>Año Fabricacion:</strong> N/A</p>
+                            <p class="card-text"><strong>Caracteristicas:</strong> N/A</p>
+                            <p class="card-text"><strong>Especialidad:</strong> N/A</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% if user.is_authenticated %}
+            <div class="row mb-3">  <!-- Añade un margen entre filas -->
+                <div class="col-md-6 text-center">
+                    <img class="img-fluid rounded" src="{% static 'img/default-user.png' %}" loading="auto">
+                </div>
+                <div class="col-md-6">
+                    <div class="card bg-body-tertiary">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">Agregar carro</h4>
+                            <h6 class="text-muted card-subtitle mb-2 text-center"> N/A</h6>
+                            <p class="card-text"><strong>Modelo:</strong> N/A</p>
+                            <p class="card-text"><strong>Origen:</strong> N/A</p>
+                            <p class="card-text"><strong>Año Fabricacion:</strong> N/A</p>
+                            <p class="card-text"><strong>Caracteristicas:</strong> N/A</p>
+                            <p class="card-text"><strong>¿Agregar carro?:</strong> <a class="card-text" target="_blank" href="{% url 'admin:pagina_bomberos_carrobomba_changelist' %}">Sí</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- Start: Carros Operativos -->
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="text-capitalize text-primary text-opacity-75">Carros Operativos</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="mb-4">Los carros operativos son aquellas piezas de material mayor que aún no cumplen X años de servicio a la comunidad. Por ello estos carros aun se encuentran disponibles en el caso de un siniestro, son los que permitirán realizar la primera respuesta.</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <!--Listar carros reliquias-->
+            {% for carro in carros_operativo %}
+            <div class="row mb-3">  <!-- Añade un margen entre filas -->
+                <div class="col-md-6 text-center">
+                    <img class="img-fluid img-fluid mb-3 rounded" src="{{ carro.foto.url }}" loading="auto">
+                </div>
+                <div class="col-md-6">
+                    <div class="card bg-body-tertiary mb-3">
+                        <div class="card-body text-center">
+                            <h4 class="card-title">{{ carro.modelo }}</h4>
+                            <h6 class="text-muted card-subtitle mb-2">{{ carro.especialidad }}</h6>
+                            <p class="card-text"><strong>Modelo:</strong> {{ carro.modelo }}</p>
+                            <p class="card-text"><strong>Origen:</strong> {{ carro.origen }}</p>
+                            <p class="card-text"><strong>Año Fabricacion:</strong> {{ carro.anio_fabricacion }}</p>
+                            <p class="card-text"><strong>Caracteristicas:</strong> {{ carro.caracteristicas }}</p>
+                            <p class="card-text"><strong>Especialidad:</strong> {{ carro.especialidad }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="row mb-3">  <!-- Añade un margen entre filas -->
+                <div class="col-md-6 text-center">
+                    <img class="img-fluid rounded" src="{% static 'img/default-user.png' %}" loading="auto">
+                </div>
+                <div class="col-md-6">
+                    <div class="card bg-body-tertiary">
+                        <div class="card-body">
+                            <h4 class="card-title text-center">No hay carros reliquias en la base de datos</h4>
+                            <h6 class="text-muted card-subtitle mb-2 text-center"> N/A</h6>
+                            <p class="card-text"><strong>Modelo:</strong> N/A</p>
+                            <p class="card-text"><strong>Origen:</strong> N/A</p>
+                            <p class="card-text"><strong>Año Fabricacion:</strong> N/A</p>
+                            <p class="card-text"><strong>Caracteristicas:</strong> N/A</p>
+                            <p class="card-text"><strong>Especialidad:</strong> N/A</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<!-- Start: Especialidades -->
+<section class="text-capitalize text-center text-primary d-flex justify-content-center">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="text-capitalize text-primary">Especialidades</h3>
+            </div>
+        </div>
+        <div class="row">
+            {% for esp in especialidades %}
+                <div class="col">
+                    <div class="card">
+                        <img class="rounded img-fluid card-img-top w-100 d-block fit-cover" style="height: 200px;" src="{{ esp.icono.url }}" />
+                        <div class="card-body p-4">
+                            <h4 class="card-title text-center">{{ esp.especialidad }}</h4>
+                            <p class="card-text text-center">{{ esp.descripcion }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col">
+                    <div class="card">
+                        <img class="rounded img-fluid card-img-top w-100 d-block fit-cover" style="height: 200px;" src="{% static 'img/default-user.png' %}" />
+                        <div class="card-body p-4">
+                            <h4 class="card-title text-center">No hay especialidades registradas</h4>
+                            <p class="card-text text-center">Registre una en la base de datos</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            {% if user.is_authenticated %}
+            <!--AGREGAR ESPECIALIDADES-->
+            <div class="col">
+              <div class="card">
+                  <img class="rounded img-fluid card-img-top w-100 d-block fit-cover" style="height: 200px;" src="{% static 'img/default-user.png' %}" />
+                  <div class="card-body p-4">
+                      <h4 class="card-title text-center">Agregar especialidad</h4>
+                      <a class="card-text text-center" target="_blank" href="{% url 'admin:pagina_bomberos_especialidadcarro_changelist' %}">Acceso</a>
+                  </div>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+    </div>
+  </section>
+{% endblock%}

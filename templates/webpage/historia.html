@@ -1,0 +1,85 @@
+{% extends "webpage_base.html" %}
+{% load static%}
+{% block titulo %}{{ name_hero }}{% endblock%}
+{% block content %}
+<section class="py-5 text-white bg-primary text-center mb-4" style="background-image: url('{% static 'img/hero-default-img.svg' %}'); background-position: center; background-size: cover;">
+    <div class="container">
+        <h1 class="text-uppercase fw-semibold mb-3">{{ name_hero }}</h1>
+        <!--<p class="mb-4">{{ description_hero }}</p>-->
+    </div>
+</section>
+<!-- Start: Fundación -->
+<section data-aos="fade-up" class="mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="text-capitalize text-primary text-opacity-75">Fundación</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <p class="text-center mx-auto mb-4">
+                    La Primera Compañía de Bomberos de Puente Alto surge el 2 de agosto de 1929, tras un voraz incendio que consumió totalmente una Barraca de Maderas ubicada en calle Concha y Toro, en diciembre de 1928, pese al esfuerzo de sus habitantes por extinguir las llamas mientras llegaban los bomberos de San Bernardo. Ante esto, y luego de constantes insistencias por medio de El Heraldo (periódico de la época), los habitantes decidieron reunirse, mas no lograron dar fruto a una compañía. Sin perjuicio de lo anterior, concluyeron reunirse otra vez en agosto de 1929 y conformaron lo que conocemos hoy en día como la Primera Compañía de Puente Alto. Su primera oficialidad estuvo compuesta por:
+                </p>
+                <ul class="list-unstyled text-center mx-auto mb-4">
+                    <li><strong>Director: </strong>Don Belarmino Meza S.</li>
+                    <li><strong>Capitán: </strong>Don Francisco Peña.</li>
+                    <li><strong>Tte. 1º: </strong>Don Luis Vásquez Castillo.</li>
+                    <li><strong>Tte. 2º: </strong>Don Carlos Abuhadba.</li>
+                    <li><strong>Sargento: </strong>Don Edmundo Agullo.</li>
+                    <li><strong>Cabo: </strong>Don Luis Clavero R.</li>
+                    <li><strong>Secretario: </strong>Don Enrique Cofré T.</li>
+                    <li><strong>Tesorero: </strong>Don Rosalino Acevedo S.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Start: Primer Carro-->
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <h3 class="text-capitalize text-primary text-opacity-75">El Primer Carro Bomba</h3>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-12">
+                        <p class="text-center">El primer carro bomba adquirido por la Compañía fue la máquina Mann. Prestó servicios en la Primera Guerra Mundial, presumiblemente como vehículo de transporte. Al finalizar la conflagración mundial, estos vehículos fueron convertidos en carros bombas y enviados a diferentes partes del mundo. Uno de ellos, alrededor del año 1920, llegó a la Primera Compañía del Cuerpo de Bomberos de Santiago.</p>
+                        <p class="text-center">Este carro bomba era óptimo en eficiencia, pero lento en su desplazamiento debido a su alto tonelaje. Las calles de la comuna en esa época, siendo de tierra con acequias de torrente permanente, presentaban desafíos únicos. Los puentes de madera semi labrada estaban calculados para el peso de las carretas y carretones, lo que añadía complejidad al uso del carro bomba en situaciones de emergencia.</p>
+                    </div>
+                </div>
+        </div>
+    </div>
+</section>
+<!-- Start: Museo -->
+<section data-aos="fade-up" class="mt-4 mb-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <h4 class="text-center text-capitalize text-primary text-opacity-75">Museo Primera CBPA</h4>
+                <p>El Museo de nuestra Compañía es un espacio dedicado a preservar y exponer la rica historia y el legado de nuestra institución. Alberga una variedad de historias, desde el EPP de la época hasta documentación y fotografías que narran nuestra evolución y contribuciones a la comunidad a lo largo de los años.</p>
+                <p>El museo está abierto al público y ofrece una oportunidad única para que visitantes de todas las edades aprendan sobre la historia del servicio de bomberos y vean de cerca todo el material histórico que han sido parte de nuestra valiosa compañía.</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h4 class="text-center text-capitalize text-primary text-opacity-75">Visitas y Recorridos</h4>
+                <p>Las visitas al museo están disponibles para el público general, escuelas, otras instituciones, etc. Realizamos recorridos guiados que proporcionan una experiencia educativa y enriquecedora. Para planificar una visita o para más información, por favor <a href="{% url 'contacto' %}">contáctenos</a>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Start: Noticias historia-->
+<section data-aos="fade-up" class="mb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="text-capitalize text-primary text-opacity-75">Sección de noticias</h3>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-12">
+                <p class="text-center">Ve las publicación realizas por nuestro historiador. <a href="{% url 'noticias' %}#Historia">Presionando aquí</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock%}
