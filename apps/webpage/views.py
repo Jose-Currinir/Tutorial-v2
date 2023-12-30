@@ -169,7 +169,6 @@ def contacto(request):
     else:
         form = ContactoForm()
 
-
     return render(request, page, {
         'name_hero': name_hero,
         'description_hero': description_hero,
