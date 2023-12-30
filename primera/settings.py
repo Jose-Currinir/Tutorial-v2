@@ -1,3 +1,4 @@
+import json
 import os
 from pathlib import Path
 import environ
@@ -139,4 +140,10 @@ if not DEBUG:
     GS_BUCKET_NAME = 'primera-dev'
     STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    GS_CREDENTIALS = service_account.Credentials.from_service_account_info(os.environ.get('GOOGLE_APPLICATION_CREDENTIALS'))
+    credenciales_json = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
+    if credenciales_json:
+        credenciales_dict = json.loads(credenciales_json)
+        GS_CREDENTIALS = service_account.Credentials.from_service_account_info(credenciales_dict)
+    else:
+        GS_CREDENTIALS = None
+        GS_CREDENTIALS = service_account.Credentials.from_service_account_info(os.environ.get('GOOGLE_APPLICATION_CREDENTIALS'))
