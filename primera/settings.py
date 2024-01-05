@@ -137,7 +137,7 @@ EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 
 if not DEBUG:
-    GS_BUCKET_NAME = 'primera-dev'
+    GS_BUCKET_NAME = 'primeracbpa-dev'
     STATICFILES_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
     credenciales_json = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS')
