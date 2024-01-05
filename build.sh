@@ -9,4 +9,4 @@ python manage.py collectstatic --verbosity=3 --noinput
 python manage.py makemigrations webpage
 python manage.py migrate
 
-#echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'jpcurrinir@gmail.com', 'admin')" | python manage.py shell
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'jpcurrinir@gmail.com', 'admin')" | python manage.py shell
